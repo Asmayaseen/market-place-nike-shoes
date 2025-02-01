@@ -1,4 +1,3 @@
-// src/pages/api/products/[id].tsx
 import { NextApiRequest, NextApiResponse } from "next";
 import { client } from "../../sanity/lib/client";
 
@@ -18,7 +17,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     // Product data return karna
     res.status(200).json(product);
-  } catch (error) {
+  } catch {
     res.status(500).json({ message: "Error fetching product data" });
   }
 }

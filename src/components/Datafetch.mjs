@@ -20,10 +20,7 @@ const Datafetch = async () => {
       _id,
       url,
       metadata {
-        dimensions {
-          width,
-          height
-        }
+      
       }
     }
   },

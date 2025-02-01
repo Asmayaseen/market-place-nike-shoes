@@ -3,7 +3,6 @@ import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
 const OrderTracking = () => {
   const [trackingNumber, setTrackingNumber] = useState("");
   const [carrierCode, setCarrierCode] = useState("ups"); // Default UPS
@@ -26,8 +25,8 @@ const OrderTracking = () => {
       } else {
         setTrackingData(data);
       }
-    } catch (error) {
-      toast.error("Something went wrong. Please try again.");
+    } catch (error: any) { // Make sure to specify the error type as 'any' or a more specific type
+      toast.error(`Something went wrong: ${error.message || "Please try again."}`);
     }
     setLoading(false);
   };

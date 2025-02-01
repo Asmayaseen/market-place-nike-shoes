@@ -75,14 +75,8 @@ export default function Mens() {
       <ToastContainer />
       {error ? (
         <div className="flex w-full items-center justify-center mt-10 text-center">
-          <Image
-            src={"/assets/outofstock.jpg"}
-            width={400}
-            height={400}
-            alt={"Out of Stock"}
-            className="mb-4"
-          />
-          <p className="text-xl font-semibold">{error}</p>
+          <Image src="/assets/outofstock.jpg" alt="Out of Stock" width={200} height={200} />
+          <p className="text-xl font-semibold">{error?.replace(/"/g, "&quot;")}</p>
         </div>
       ) : (
         <main className="w-full lg:w-3/4 p-6">
