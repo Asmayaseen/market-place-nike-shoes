@@ -1,23 +1,18 @@
 import React from "react";
-import Image from "next/image";
+
 export default function SignIn() {
   return (
     <div className="flex mt-2 justify-center mb-10 bg-[#FFFFFF]">
       <div className="w-[90%] max-w-[380px] h-auto bg-[#FFFFFF] px-6">
         <div className="text-center mb-3">
-          <Image
-            className="w-[50px] h-[50px] object-contain"
-            width={50}
-            height={50}
-            src="/assets/Nike.png"
+          <img
+            src="/assets/Nike.png" 
             alt="Nike Logo"
-            style={{ width: "auto", height: "auto" }} // Add this to maintain aspect ratio
+            className="mx-auto w-16 h-16"
           />
         </div>
         <h1 className="text-[18px] font-bold text-center text-[#111111]">
-          YOUR ACCOUNT <br />
-          FOR EVERYTHING <br />
-          NIKE
+          YOUR ACCOUNT <br/>FOR EVERYTHING <br/>NIKE
         </h1>
         <form className="mt-6">
           <div className="mb-4">
@@ -45,10 +40,7 @@ export default function SignIn() {
               Forgotten your password?
             </a>
           </div>
-          <p className="text-[#38D8D8D] text-[12px] items-center p-4 text-center">
-            By logging in, you agree to Nike&apos;s Privacy Policy and Terms of
-            Use.
-          </p>
+          <p className="text-[#38D8D8D] text-[12px] items-center p-4 text-center">By logging in, you agree to Nike&apos;s Privacy Policy and Terms of Use.</p>
           <button
             type="submit"
             className="w-full bg-black text-white py-2 rounded-md hover:bg-gray-800"

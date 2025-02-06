@@ -16,7 +16,7 @@
 
 @layer utilities {
   .text-balance {
-    text-wrap: balance;
+    text-align: justify; /* Replace balance with a valid property */
   }
 }
 
@@ -26,67 +26,25 @@ body {
   padding: 0;
   overflow-x: hidden; /* Prevent horizontal overflow */
   width: 100%;
-  scroll-behavior: smooth; /* Smooth scrolling */
 }
 
 body {
   font-family: 'Helvetica Neue', Arial, sans-serif;
-  background-color: var(--background);
-  color: var(--foreground);
-  line-height: 1.6; /* Improved readability */
 }
 
-/* Font utility for Helvetica */
 .font-helvetica {
   font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 
-/* Utility classes for unordered lists */
-.ess-ul {
-  padding: 10px 15px; /* Added consistent padding */
-  margin-bottom: 15px; /* Increased margin for better spacing */
-  display: flex;
-  flex-direction: column; /* Stack items vertically */
-  gap: 10px; /* Gap between list items */
-}
-
 .ess-ul li {
   color: gray;
-  padding: 10px; /* Equal padding for consistency */
-  display: flex; /* Flex layout for alignment */
+  padding-top: 7px;
+  padding-bottom: 7px;
   align-items: center;
-  border-radius: 8px; /* Rounded corners */
-  transition: background-color 0.3s ease; /* Smooth hover effect */
 }
 
-.ess-ul li:hover {
-  background-color: rgba(128, 128, 128, 0.1); /* Subtle hover background */
-}
-
-/* Responsive utilities */
-@media (max-width: 768px) {
-  body {
-    padding: 10px; /* Add padding for smaller screens */
-  }
-
-  .ess-ul {
-    padding: 10px; /* Adjust padding for small screens */
-    gap: 8px; /* Slightly smaller gaps for compact layout */
-  }
-
-  .ess-ul li {
-    padding: 8px; /* Reduced padding for smaller screens */
-    font-size: 0.9rem; /* Slightly smaller font */
-  }
-}
-
-@media (min-width: 1024px) {
-  .ess-ul {
-    padding: 15px 20px; /* Extra padding for larger screens */
-  }
-
-  .ess-ul li {
-    padding: 12px; /* Increase padding for larger screens */
-    font-size: 1rem; /* Larger font for readability */
-  }
+.ess-ul {
+  padding: 5px 10px;
+  margin-bottom: 10px;
+  align-items: center;
 }

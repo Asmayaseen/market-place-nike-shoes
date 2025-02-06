@@ -5,8 +5,8 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
-import Image from "next/image"; // Ensure Image component is imported
 import { useWishList } from "@/components/WishList";
+import Image from "next/image";
 
 type Product = {
   _id: string;
@@ -20,7 +20,7 @@ export default function SNKRS() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const { wishList, addToWishList, removeFromWishList } = useWishList();
+  const { wishList, addToWishList, removeFromWishList } = useWishList(); // Use the context
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -70,16 +70,15 @@ export default function SNKRS() {
     <>
       <ToastContainer />
       {error ? (
-        <div className="flex w-full items-center justify-center mt-10">
-          <Image
-            src="/assets/Out_Of_Stock.jpg"
-            width={500}
-            height={500}
-            alt="Out of Stock"
-            className="mb-4"
-            priority // Added priority for LCP optimization
-          />
-        </div>
+       <div className="flex w-full items-center justify-center mt-10">
+                        <Image
+                          src={"/assets/Out_Of_Stock.jpg"}
+                          width={500}
+                          height={500}
+                          alt={"Out of Stock"}
+                          className="mb-4"
+                        />
+                      </div>
       ) : (
         <main className="w-full lg:w-3/4 p-6">
           <div className="flex justify-between items-center mb-4">
@@ -97,15 +96,12 @@ export default function SNKRS() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {products.map((product) => (
-              <div key={product._id} className="border p-4">
+              <div key={product._id} className="border p-4 ">
                 <Link href={`/Products/${product._id}`}>
-                  <Image
+                  <img
                     src={product.imageUrl}
                     alt={product.productName}
-                    width={300} // Added width
-                    height={300} // Added height
                     className="w-full mb-4"
-                    priority // Added priority for LCP optimization
                   />
                 </Link>
                 <h3 className="text-lg font-medium">{product.productName}</h3>

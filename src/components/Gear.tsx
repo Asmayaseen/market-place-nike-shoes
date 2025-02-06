@@ -25,9 +25,8 @@ export default function Gear() {
                             alt='man dress'
                             width={280}
                             height={250}
-                            style={{ width: "auto", height: "auto" }} // Add this to maintain aspect ratio
                         />
-                        <div className='flex justify-between items-center px-2 pt-2 flex-wrap'>
+                        <div className='flex justify-between items-center px-2 pt-2  flex-wrap'>
 
                             <div className='text-xs font-bold pr-2'>Nike Dri-FIT ADV TechKnit Ultra</div>
                             <div className='text-sm'>₹ 3 895</div>
@@ -53,7 +52,6 @@ export default function Gear() {
                             alt='man dress'
                             width={280}
                             height={250}
-                            style={{ width: "auto", height: "auto" }} // Add this to maintain aspect ratio
                         />
                         <div className='flex flex-col med:flex-row justify-between items-center flex-wrap px-2 pt-2'>
                             <div className='text-xs font-bold pr-2'>Nike Dri-FIT Challenger</div>
@@ -86,7 +84,6 @@ export default function Gear() {
                             alt='man dress'
                             width={280}
                             height={250}
-                            style={{ width: "auto", height: "auto" }} // Add this to maintain aspect ratio
                         />
 
                         <div className='flex justify-between items-center flex-wrap px-2 pt-2'>
@@ -110,14 +107,13 @@ export default function Gear() {
                             </div>
                         </div>
                         <Image
-                            className='pr-5 md:pr-0'
+                        className='pr-5 md:pr-0'
                             src={'/assets/gear2.png'}
                             alt='man dress'
                             width={280}
                             height={250}
-                            style={{ width: "auto", height: "auto" }} // Add this to maintain aspect ratio
                         />
-                        <div className='flex flex-col med:flex-row justify-between flex-wrap items-center pr-16 pt-2'>
+                        <div className='flex flex-col med:flex-row  justify-between flex-wrap items-center pr-16 pt-2'>
                             <div className='text-sm font-bold pr-2'>Nike Fast</div>
                             <div className='text-sm'>₹ 3 795</div>
                         </div>

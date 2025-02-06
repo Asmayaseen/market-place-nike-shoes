@@ -1,8 +1,8 @@
-'use client';
+"use client";
 import React from "react";
 import { useWishList } from "@/components/WishList";
 import Link from "next/link";
-import Image from "next/image"; // Ensure Image component is imported
+import Image from "next/image";
 
 export default function WishListPage() {
   const { wishList, removeFromWishList, clearWishList } = useWishList();
@@ -20,9 +20,9 @@ export default function WishListPage() {
             className="mb-1"
           />
           <Link href={'/'}>
-            <button className="w-full -mt-4 px-10 bg-black text-white py-3 rounded-3xl font-medium">
-              Start Shopping
-            </button>
+          <button className="w-full -mt-4 px-10 bg-black text-white py-3 rounded-3xl font-medium">
+            Start Shopping
+          </button>
           </Link>
         </div>
       ) : (
@@ -37,11 +37,9 @@ export default function WishListPage() {
             {wishList.map((product) => (
               <div key={product.id} className="border p-4">
                 <Link href={`/Products/${product.id}`}>
-                  <Image
+                  <img
                     src={product.imageUrl}
                     alt={product.name}
-                    width={300} // Provide width
-                    height={300} // Provide height
                     className="w-full mb-4"
                   />
                 </Link>

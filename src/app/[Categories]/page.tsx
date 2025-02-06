@@ -17,16 +17,16 @@ export default function Categories() {
         return <Mens />;
       case "/womens":
         return <Womens />;
-      case "/kids":
-        return <Kids />;
-      case "/sale":
-        return <Sales />;
+        case "/kids":
+        return <Kids/>;
+        case "/sale":
+        return <Sales/>;
       case "/SNKRS":
         return <SNKRS />;
       default:
         return (
           <div>
-            <Products />
+            <Products/>
           </div>
         );
     }
@@ -38,7 +38,8 @@ export default function Categories() {
       <Filter />
 
       {/* Main Content */}
-      {renderContent()}
+        {renderContent()}
+     
     </div>
   );
 }

@@ -1,66 +1,32 @@
-// components/SearchBar.tsx
+import React, { ChangeEvent } from 'react';
+type Product = {
+  id: number; // or string if IDs are strings
+  name: string;
+  price: number; // Adjust the type based on your product properties
+  description?: string; // Optional property
+};
 
-import { useState } from 'react';
-import { client } from '../lib/sanityImage.mjs'; // Sanity client import
-
-interface SearchBarProps {
-  setQuery: React.Dispatch<React.SetStateAction<string>>;
-}
-
-const SearchBar: React.FC<SearchBarProps> = ({ setQuery }) => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [results, setResults] = useState<any[]>([]); // To store search results
-
-  // Function to fetch search results from Sanity
-  const handleSearch = async () => {
-    const query = `*[_type == "product" && name match $searchTerm]{
-      name,
-      price,
-      description,
-      image
-    }`;
-
-    try {
-      const res = await client.fetch(query, { searchTerm: `*${searchTerm}*` });
-      setResults(res);
-      setQuery(searchTerm); // Update parent component query state
-    } catch (error) {
-      console.error('Error fetching products:', error);
-    }
-  };
-
+type SearchBarProps = {
+  products: Product; // Accept products as an array
+  handleSearch: (event: ChangeEvent<HTMLInputElement>) => void;
+  searchQuery: string;
+};
+const SearchableProductList: React.FC<SearchBarProps> = ({ handleSearch, searchQuery }) => {
   return (
-    <div className="flex items-center justify-center my-6">
-      <input
-        type="text"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        placeholder="Search products..."
-        className="p-2 border rounded-lg w-64"
+    <div>
+      {/* Search bar */}
+      <input 
+        type="text" 
+        placeholder="Search Products..."
+        value={searchQuery}
+        onChange={handleSearch}
+        className="search-bar" 
       />
-      <button
-        onClick={handleSearch}
-        className="ml-2 p-2 bg-blue-500 text-white rounded-lg"
-      >
-        Search
-      </button>
-
-      {/* Display search results */}
-      <div className="mt-4">
-        {results.length > 0 ? (
-          results.map((product) => (
-            <div key={product._id} className="border-b py-2">
-              <h3>{product.name}</h3>
-              <p>{product.price}</p>
-              <p>{product.description}</p>
-            </div>
-          ))
-        ) : (
-          <p>No results found.</p>
-        )}
+      <div>
+      
       </div>
     </div>
   );
 };
 
-export default SearchBar;
+export default SearchableProductList;

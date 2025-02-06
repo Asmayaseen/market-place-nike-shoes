@@ -1,3 +1,4 @@
+
 import FAQs from "@/components/FAQs";
 import Image from "next/image";
 import Link from "next/link";

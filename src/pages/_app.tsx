@@ -1,10 +1,14 @@
-import { CartProvider } from "@/components/CartContext";
-import "@/app/globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
+import { AppProps } from "next/app";
 
-export default function App({ Component, pageProps }: any) {
+function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <CartProvider>
+    <ClerkProvider
+      publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || ""}
+    >
       <Component {...pageProps} />
-    </CartProvider>
+    </ClerkProvider>
   );
 }
+
+export default MyApp;

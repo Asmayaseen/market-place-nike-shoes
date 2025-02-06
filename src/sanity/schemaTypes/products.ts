@@ -47,14 +47,5 @@ export const productSchema = {
       title: 'Description',
       type: 'text',
     },
-    {
-      name: 'slug',
-      title: 'Slug',
-      type: 'slug',
-      options: {
-        source: 'productName', // Automatically generates slug from productName
-        maxLength: 96,
-      },
-    },
   ],
-};
+}
