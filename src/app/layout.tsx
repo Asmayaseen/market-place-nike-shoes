@@ -1,5 +1,3 @@
-
-
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
@@ -26,8 +24,10 @@ export default function RootLayout({
         <body>
           <CartProvider>
             <WishListProvider>
-              <Header /> {/* Authentication Buttons Header me add honge */}
-              <main>{children}</main>
+              <Header />
+              <main>
+                {children}
+              </main>
               <Footer />
             </WishListProvider>
           </CartProvider>

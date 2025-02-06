@@ -3,11 +3,19 @@ import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+interface TrackingData {
+  status_description: string;
+  carrier_detail: {
+    name: string;
+  };
+  estimated_delivery_date: string | null;
+}
+
 const OrderTracking = () => {
-  const [trackingNumber, setTrackingNumber] = useState("");
-  const [carrierCode, setCarrierCode] = useState("ups"); // Default UPS
-  const [trackingData, setTrackingData] = useState<any>(null);
-  const [loading, setLoading] = useState(false);
+  const [trackingNumber, setTrackingNumber] = useState<string>("");
+  const [carrierCode, setCarrierCode] = useState<string>("ups"); // Default UPS
+  const [trackingData, setTrackingData] = useState<TrackingData | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleTrackOrder = async () => {
     if (!trackingNumber.trim()) {
@@ -25,8 +33,8 @@ const OrderTracking = () => {
       } else {
         setTrackingData(data);
       }
-    } catch (error: any) { // Make sure to specify the error type as 'any' or a more specific type
-      toast.error(`Something went wrong: ${error.message || "Please try again."}`);
+    } catch (error: unknown) {
+      toast.error(`Something went wrong: ${(error as Error).message || "Please try again."}`);
     }
     setLoading(false);
   };

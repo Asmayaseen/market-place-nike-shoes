@@ -12,12 +12,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    const response = await fetch(`https://api.shipengine.com/v1/tracking?carrier_code=${carrierCode}&tracking_number=${trackingNumber}`, {
-      headers: {
-        "API-Key": process.env.NEXT_PUBLIC_SHIPENGINE_API_KEY as string,
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `https://api.shipengine.com/v1/tracking?carrier_code=${carrierCode}&tracking_number=${trackingNumber}`,
+      {
+        headers: {
+          "API-Key": process.env.NEXT_PUBLIC_SHIPENGINE_API_KEY as string,
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     if (!response.ok) {
       throw new Error("Failed to fetch tracking data");
@@ -25,8 +28,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const data = await response.json();
     res.status(200).json(data);
-  } catch (error: any) {
-    console.error("Error occurred:", error.message); // Log the error for debugging
-    res.status(500).json({ error: "Something went wrong", message: error.message });
+  } catch (error) {
+    console.error("Error occurred:", error);
+
+    if (error instanceof Error) {
+      res.status(500).json({ error: "Something went wrong", message: error.message });
+    } else {
+      res.status(500).json({ error: "An unknown error occurred" });
+    }
   }
 }

@@ -2,7 +2,7 @@
 import React from "react";
 import { useWishList } from "@/components/WishList";
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/image"; // Import Image from Next.js
 
 export default function WishListPage() {
   const { wishList, removeFromWishList, clearWishList } = useWishList();
@@ -14,15 +14,15 @@ export default function WishListPage() {
         <div className="flex flex-col w-full items-center justify-center mt-10">
           <Image
             src={"/assets/WishList_Empty.jpg"}
-            width={300}
-            height={300}
+            width={300} // Set width for optimization
+            height={300} // Set height for optimization
             alt={"Your Wish List Empty"}
             className="mb-1"
           />
           <Link href={'/'}>
-          <button className="w-full -mt-4 px-10 bg-black text-white py-3 rounded-3xl font-medium">
-            Start Shopping
-          </button>
+            <button className="w-full -mt-4 px-10 bg-black text-white py-3 rounded-3xl font-medium">
+              Start Shopping
+            </button>
           </Link>
         </div>
       ) : (
@@ -37,9 +37,11 @@ export default function WishListPage() {
             {wishList.map((product) => (
               <div key={product.id} className="border p-4">
                 <Link href={`/Products/${product.id}`}>
-                  <img
+                  <Image
                     src={product.imageUrl}
                     alt={product.name}
+                    width={300} // Set width for optimization
+                    height={300} // Set height for optimization
                     className="w-full mb-4"
                   />
                 </Link>

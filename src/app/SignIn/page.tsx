@@ -1,18 +1,22 @@
 import React from "react";
+import Image from "next/image"; // Import Image from Next.js
 
 export default function SignIn() {
   return (
     <div className="flex mt-2 justify-center mb-10 bg-[#FFFFFF]">
       <div className="w-[90%] max-w-[380px] h-auto bg-[#FFFFFF] px-6">
         <div className="text-center mb-3">
-          <img
-            src="/assets/Nike.png" 
+          {/* Replacing <img> with <Image /> for optimization */}
+          <Image
+            src="/assets/Nike.png"
             alt="Nike Logo"
-            className="mx-auto w-16 h-16"
+            width={64} // Specify width
+            height={64} // Specify height
+            className="mx-auto"
           />
         </div>
         <h1 className="text-[18px] font-bold text-center text-[#111111]">
-          YOUR ACCOUNT <br/>FOR EVERYTHING <br/>NIKE
+          YOUR ACCOUNT <br />FOR EVERYTHING <br />NIKE
         </h1>
         <form className="mt-6">
           <div className="mb-4">
@@ -40,7 +44,9 @@ export default function SignIn() {
               Forgotten your password?
             </a>
           </div>
-          <p className="text-[#38D8D8D] text-[12px] items-center p-4 text-center">By logging in, you agree to Nike&apos;s Privacy Policy and Terms of Use.</p>
+          <p className="text-[#38D8D8D] text-[12px] items-center p-4 text-center">
+            By logging in, you agree to Nike&apos;s Privacy Policy and Terms of Use.
+          </p>
           <button
             type="submit"
             className="w-full bg-black text-white py-2 rounded-md hover:bg-gray-800"

@@ -3,15 +3,15 @@ import React, { useState } from "react";
 import Image from "next/image"; // Import the Image component
 
 export default function JoinUs() {
-  const [selectedCountry, setSelectedCountry] = useState("");
-  const [gender, setGender] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState<string>(""); // Explicit type for selectedCountry
+  const [gender, setGender] = useState<string>(""); // Explicit type for gender
 
-  const handleCountryChange = (event: { target: { value: any } }) => {
+  const handleCountryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const country = event.target.value;
     setSelectedCountry(country);
   };
 
-  const handleGenderSelect = (selectedGender: React.SetStateAction<string>) => {
+  const handleGenderSelect = (selectedGender: string) => {
     setGender(selectedGender);
   };
 

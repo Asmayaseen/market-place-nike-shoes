@@ -1,8 +1,7 @@
-// pages/api/create-checkout-session.js
-import { stripe } from "stripe";
+import Stripe from "stripe";
 
-const stripeSecretKey = "your-secret-key"; // Apne secret key ko use karo
-const stripeInstance = new stripe(stripeSecretKey);
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY; // Environment variable use karo
+const stripeInstance = new Stripe(stripeSecretKey);
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
@@ -16,7 +15,7 @@ export default async function handler(req, res) {
               name: item.name,
               images: [item.imageUrl],
             },
-            unit_amount: item.price * 100, // Price ko cents mein convert karo
+            unit_amount: item.price * 100, // Convert price to cents
           },
           quantity: item.quantity,
         })),
@@ -26,8 +25,12 @@ export default async function handler(req, res) {
       });
 
       res.status(200).json({ id: session.id });
-    } catch (error) {
+    } catch (err) {
+      console.error("Error creating checkout session:", err);
       res.status(500).json({ error: "Error creating checkout session" });
     }
+  } else {
+    res.setHeader("Allow", ["POST"]);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }
