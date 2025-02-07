@@ -1,34 +1,70 @@
 import { groq } from 'next-sanity';
 
+// Fetch all products
+export const getAllProducts = groq`*[_type == "product"]{
+  _id,
+  title,
+  price,
+  "image": images[0].asset->url,
+  description,
+  category,
+  stock
+}`;
 
-export const sixProductsQuery = groq`*[_type == "product"][0..5]`;
+// Fetch a single product by ID
+export const getProductById = groq`*[_type == "product" && _id == $id][0]`;
 
-export const allProductsQuery = groq`*[_type == "product"]`;
+// Fetch products by category
+export const getProductsByCategory = groq`*[_type == "product" && category == $category]`;
 
-export const jordanNikeProductsQuery = groq`*[_type == "product" && "nike jordan" in tags]`;
+// Fetch all orders (if using orders in Sanity)
+export const getAllOrders = groq`*[_type == "order"]{
+  _id,
+  userId,
+  totalAmount,
+  status,
+  paymentMethod,
+  items[]
+}`;
 
-export const jordanProductsQuery = groq`*[_type == "product" && "jordan" in tags]`;
+// Fetch user details by ID (if users are stored in Sanity)
+export const getUserById = groq`*[_type == "user" && _id == $id][0]`;
 
-export const airProductsQuery = groq`*[_type == "product" && "air" in tags]`;
+// Fetch all categories
+export const getAllCategories = groq`*[_type == "category"]{ _id, title }`;
 
-export const womenProductsQuery = groq`*[_type == "product" && "women" in tags]`;
+// Fetch featured products (if using a featured flag in schema)
+export const getFeaturedProducts = groq`*[_type == "product" && featured == true]`;
 
-export const kidsProductsQuery = groq`*[_type == "product" && "kids" in tags]`;
+// Fetch products with discounts
+export const getDiscountedProducts = groq`*[_type == "product" && discountPercentage > 0]`;
 
-export const newProductsQuery = groq`*[_type == "product" && "new" in tags]`;
+// Fetch latest products (assuming you have a _createdAt field)
+export const getLatestProducts = groq`*[_type == "product"] | order(_createdAt desc)[0...10]`;
 
-export const menProductsQuery = groq`*[_type == "product" && "men" in tags]`;
+// Fetch all customers (if storing customers in Sanity)
+export const getAllCustomers = groq`*[_type == "customer"]{
+  _id,
+  name,
+  email,
+  phone,
+  address
+}`;
 
-export const bestsellerProductsQuery = groq`*[_type == "product" && "bestseller" in tags]`;
+// Fetch a single customer by ID
+export const getCustomerById = groq`*[_type == "customer" && _id == $id][0]`;
 
-export const bannerQuery = groq`*[_type == 'banner' && "banner" in tags]`;
+// Fetch orders for a specific customer
+export const getCustomerOrders = groq`*[_type == "order" && userId == $userId]{
+  _id,
+  totalAmount,
+  status,
+  paymentMethod,
+  items[]
+}`;
 
-export const menBannerQuery = groq`*[_type == 'banner' && "men" in tags]`;
-
-export const helpQuery =`*[_type == 'help']`
-
-export const getEssentialsMensQuery = groq`*[_type == 'banner' && "essentials-mens" in tags]`;
-
-export const getEssentialsWomensQuery = groq`*[_type == 'banner' && "essentials-womens" in tags]`;
-
-export const getEssentialsKidsQuery = groq`*[_type == 'banner' && "essentials-kids" in tags]`;
+// Fetch wishlist for a specific customer
+export const getCustomerWishlist = groq`*[_type == "wishlist" && userId == $userId]{
+  _id,
+  items[]
+}`;

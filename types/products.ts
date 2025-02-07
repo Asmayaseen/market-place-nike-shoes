@@ -3,7 +3,7 @@ export interface Product {
     reduce(arg0: (sum: any, order: any) => any, arg1: number): unknown;
     _id: string;
     _type: 'product';
-    name: string;
+    productNname: string;
     image?: {
       _type: 'image';
       asset: {

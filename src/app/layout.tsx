@@ -5,6 +5,8 @@ import Footer from "@/components/Footer";
 import { CartProvider } from "@/components/CartContext";
 import { WishListProvider } from "@/components/WishList";
 import { ClerkProvider } from "@clerk/nextjs";
+import { ToastContainer } from "react-toastify";
+
 
 export const metadata: Metadata = {
   title: "Nike Store",
@@ -25,9 +27,9 @@ export default function RootLayout({
           <CartProvider>
             <WishListProvider>
               <Header />
-              <main>
+             
                 {children}
-              </main>
+                <ToastContainer />
               <Footer />
             </WishListProvider>
           </CartProvider>

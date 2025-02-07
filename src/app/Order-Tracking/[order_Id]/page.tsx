@@ -4,30 +4,30 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Image from "next/image";
 
-// Define types for order details
-interface FormData {
-  firstName: string;
-  lastName: string;
-  address: string;
-}
-
-interface CartItem {
+// TypeScript interfaces
+interface OrderItem {
   name: string;
   quantity: number;
   price: number;
 }
 
+interface OrderFormData {
+  firstName: string;
+  lastName: string;
+  address: string;
+}
+
 interface OrderDetails {
-  formData: FormData;
-  cart: CartItem[];
   orderId: string;
+  formData: OrderFormData;
+  cart: OrderItem[];
 }
 
 const OrderTracking = () => {
-  const [orderIdInput, setOrderIdInput] = useState<string>("");  
+  const [orderIdInput, setOrderIdInput] = useState<string>("");
   const [orderDetails, setOrderDetails] = useState<OrderDetails | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [isTracking, setIsTracking] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isTracking, setIsTracking] = useState(false);
 
   const handleOrderIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setOrderIdInput(e.target.value);
@@ -40,26 +40,16 @@ const OrderTracking = () => {
   useEffect(() => {
     if (isTracking) {
       const savedOrderDetails = sessionStorage.getItem("orderDetails");
-
       if (savedOrderDetails) {
-        try {
-          const parsedDetails: OrderDetails = JSON.parse(savedOrderDetails);
-          
-          if (parsedDetails.orderId === orderIdInput) {
-            setOrderDetails(parsedDetails);
-            setIsModalOpen(true);
-          } else {
-            setOrderDetails(null);
-            toast.error("Order ID not found! Please check and try again.");
-          }
-        } catch (error) {
-          console.error("Error parsing order details:", error);
-          toast.error("Error fetching order details.");
+        const { formData, cart, orderId }: OrderDetails = JSON.parse(savedOrderDetails);
+        if (orderId === orderIdInput) {
+          setOrderDetails({ formData, cart, orderId });
+          setIsModalOpen(true);
+        } else {
+          setOrderDetails(null);
+          toast.error("Order ID not found! Please check and try again.");
         }
-      } else {
-        toast.error("No order details found!");
       }
-
       setIsTracking(false);
     }
   }, [isTracking, orderIdInput]);
@@ -70,14 +60,13 @@ const OrderTracking = () => {
 
   return (
     <div className="min-h-screen p-6">
-      <div className="max-w-md mx-auto bg-white p-6 rounded-md shadow-lg">
+      <div className="max-w-md mx-auto bg-white p-6 rounded-md">
         <div className="text-center mb-3">
           <Image
             src="/assets/Nike.png"
             alt="Nike Logo"
             width={64}
             height={64}
-            priority
             className="mx-auto"
           />
           <h1 className="text-3xl font-bold mb-4">Track Your Order</h1>
@@ -90,11 +79,11 @@ const OrderTracking = () => {
             value={orderIdInput}
             onChange={handleOrderIdChange}
             placeholder="Enter your Order ID"
-            className="w-full p-3 border border-gray-300 rounded-md focus:ring focus:ring-gray-500"
+            className="w-full p-3 border border-gray-300 rounded-md"
           />
           <button
             onClick={handleTrackOrder}
-            className="mt-4 w-full p-3 bg-black text-white rounded-lg hover:bg-gray-800"
+            className="mt-4 w-full p-3 bg-black text-white rounded-lg"
           >
             Track Order
           </button>
@@ -103,10 +92,16 @@ const OrderTracking = () => {
         {/* Modal for displaying order details */}
         {isModalOpen && orderDetails && (
           <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
-            <div className="bg-white p-6 rounded-md w-96 shadow-lg">
+            <div className="bg-white p-6 rounded-md w-96">
               <h3 className="font-bold text-xl mb-4">Order Details</h3>
-              <p><strong>Name:</strong> {orderDetails.formData.firstName} {orderDetails.formData.lastName}</p>
-              <p><strong>Address:</strong> {orderDetails.formData.address}</p>
+              <p>
+                <strong>Name:</strong> {orderDetails.formData.firstName}{" "}
+                {orderDetails.formData.lastName}
+              </p>
+              <p>
+                <strong>Address:</strong> {orderDetails.formData.address}
+              </p>
+
               <ul className="mb-4">
                 <strong>Order Items:</strong>
                 {orderDetails.cart.map((item, index) => (
@@ -115,16 +110,21 @@ const OrderTracking = () => {
                   </li>
                 ))}
               </ul>
+
               <p>
-                <strong>Total: Rs {orderDetails.cart.reduce(
-                  (total, item) => total + item.price * item.quantity,
-                  0
-                )}</strong>
+                <strong>
+                  Total: Rs{" "}
+                  {orderDetails.cart.reduce(
+                    (total, item) => total + item.price * item.quantity,
+                    0
+                  )}
+                </strong>
               </p>
+
               <div className="mt-4 text-center">
                 <button
                   onClick={closeModal}
-                  className="w-full p-4 bg-red-600 text-white rounded-3xl hover:bg-red-700"
+                  className="w-full p-4 bg-red-600 text-white rounded-3xl"
                 >
                   Close
                 </button>
