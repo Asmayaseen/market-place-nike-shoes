@@ -75,15 +75,15 @@ export default function Mens() {
     <>
       <ToastContainer />
       {error ? (
-         <div className="flex w-full items-center justify-center mt-10">
-                  <Image
-                    src={"/assets/Out_Of_Stock.jpg"}
-                    width={400}
-                    height={400}
-                    alt={"Out of Stock"}
-                    className="mb-4"
-                  />
-                </div>
+        <div className="flex w-full items-center justify-center mt-10">
+          <Image
+            src={"/assets/Out_Of_Stock.jpg"}
+            width={400}
+            height={400}
+            alt={"Out of Stock"}
+            className="mb-4"
+          />
+        </div>
       ) : (
         <main className="w-full lg:w-3/4 p-6">
           <div className="flex justify-between items-center mb-4">
@@ -103,9 +103,11 @@ export default function Mens() {
             {products.map((product) => (
               <div key={product._id} className="border p-4">
                 <Link href={`/Products/${product._id}`}>
-                  <img
+                  <Image
                     src={product.imageUrl}
                     alt={product.productName}
+                    width={300}
+                    height={300}
                     className="w-full mb-4"
                   />
                 </Link>

@@ -2,6 +2,7 @@
 import { Product } from '@/types/product';
 
 
+
 export const addToWishlist = (product: Product) => {
     const wishlist: Product[] = JSON.parse(localStorage.getItem('wishlist') || '[]');
     const existingProductIndex = wishlist.findIndex(item => item._id === product._id);

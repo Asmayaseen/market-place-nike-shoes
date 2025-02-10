@@ -15,6 +15,7 @@ import { ToastContainer } from "react-toastify";
 import { Toaster } from "react-hot-toast";
 
 
+
 export const metadata: Metadata = {
   title: "Nike Store",
   description: "Nike E-Commerce Website",

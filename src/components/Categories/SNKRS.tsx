@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { client } from "@/sanity/lib/client";
-import { BsFillFilterCircleFill } from "react-icons/bs";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -17,10 +16,9 @@ type Product = {
 };
 
 export default function SNKRS() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const { wishList, addToWishList, removeFromWishList } = useWishList(); // Use the context
+  const { wishList, addToWishList, removeFromWishList } = useWishList();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -47,10 +45,6 @@ export default function SNKRS() {
     fetchProducts();
   }, []);
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
-
   const toggleWishList = (product: Product) => {
     if (wishList.some((item) => item.id === product._id)) {
       removeFromWishList(product._id);
@@ -70,43 +64,34 @@ export default function SNKRS() {
     <>
       <ToastContainer />
       {error ? (
-       <div className="flex w-full items-center justify-center mt-10">
-                        <Image
-                          src={"/assets/Out_Of_Stock.jpg"}
-                          width={500}
-                          height={500}
-                          alt={"Out of Stock"}
-                          className="mb-4"
-                        />
-                      </div>
+        <div className="flex w-full items-center justify-center mt-10">
+          <Image
+            src="/assets/Out_Of_Stock.jpg"
+            width={500}
+            height={500}
+            alt="Out of Stock"
+            className="mb-4"
+            priority
+          />
+        </div>
       ) : (
         <main className="w-full lg:w-3/4 p-6">
-          <div className="flex justify-between items-center mb-4">
-            {!isSidebarOpen && (
-              <button
-                className="lg:hidden top-4 left-4 z-auto bg-gray-800 text-white p-2 rounded-full"
-                onClick={toggleSidebar}
-              >
-                <BsFillFilterCircleFill />
-              </button>
-            )}
-            <h2 className="text-xl font-semibold">Sort By</h2>
-            <button className="text-gray-600">Hide Filters</button>
-          </div>
-
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {products.map((product) => (
-              <div key={product._id} className="border p-4 ">
+              <div key={product._id} className="border p-4">
                 <Link href={`/Products/${product._id}`}>
-                  <img
+                  <Image
                     src={product.imageUrl}
                     alt={product.productName}
-                    className="w-full mb-4"
+                    width={300} 
+                    height={300} 
+                    className="w-full mb-4 object-cover"
+                    priority
                   />
                 </Link>
                 <h3 className="text-lg font-medium">{product.productName}</h3>
                 <p className="text-gray-500">{product.colors?.join(", ")}</p>
-                <p className="text-gray-900">MRP: {product.price}</p>
+                <p className="text-gray-900">MRP: ₹ {product.price}</p>
                 <button
                   className="relative top-2 right-2 text-xl"
                   onClick={() => toggleWishList(product)}

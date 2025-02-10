@@ -2,6 +2,7 @@
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useCart } from "@/components/CartContext";
+import Image from "next/image";
 
 interface Product {
   _id: string;
@@ -38,10 +39,13 @@ export default function ProductDetailClient({ product }: { product: Product }) {
     <div className="p-6">
       <div className="flex flex-col lg:flex-row gap-8">
         <div className="w-full lg:w-1/2">
-          <img
+          <Image
             src={product.imageUrl}
             alt={product.productName}
-            className="w-full h-96 rounded-lg shadow-md"
+            width={500} // Adjust width based on your design
+            height={500} // Adjust height based on your design
+            className="w-full h-96 rounded-lg shadow-md object-cover"
+            priority
           />
         </div>
         <div className="w-full lg:w-1/2">

@@ -16,11 +16,11 @@ type Product = {
   price: number;
 };
 
-export default function Mens() {
+export default function Sales() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const { wishList, addToWishList, removeFromWishList } = useWishList(); // Use the context
+  const { wishList, addToWishList, removeFromWishList } = useWishList();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -38,8 +38,7 @@ export default function Mens() {
         }`;
         const fetchedProducts = await client.fetch(query);
         if (fetchedProducts.length === 0) {
-          // If no products are found, show error
-          setError("No products found in the Kids category.");
+          setError("No products found in the Sales category.");
         } else {
           setProducts(fetchedProducts);
         }
@@ -75,15 +74,15 @@ export default function Mens() {
     <>
       <ToastContainer />
       {error ? (
-         <div className="flex w-full items-center justify-center mt-10">
-                  <Image
-                    src={"/assets/Out_Of_Stock.jpg"}
-                    width={400}
-                    height={400}
-                    alt={"Out of Stock"}
-                    className="mb-4"
-                  />
-                </div>
+        <div className="flex w-full items-center justify-center mt-10">
+          <Image
+            src="/assets/Out_Of_Stock.jpg"
+            width={400}
+            height={400}
+            alt="Out of Stock"
+            className="mb-4"
+          />
+        </div>
       ) : (
         <main className="w-full lg:w-3/4 p-6">
           <div className="flex justify-between items-center mb-4">
@@ -103,10 +102,12 @@ export default function Mens() {
             {products.map((product) => (
               <div key={product._id} className="border p-4">
                 <Link href={`/Products/${product._id}`}>
-                  <img
+                  <Image
                     src={product.imageUrl}
                     alt={product.productName}
-                    className="w-full mb-4"
+                    width={300} // Adjust width as needed
+                    height={300} // Adjust height as needed
+                    className="w-full mb-4 object-cover"
                   />
                 </Link>
                 <h3 className="text-lg font-medium">{product.productName}</h3>

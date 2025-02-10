@@ -103,9 +103,11 @@ export default function Mens() {
             {products.map((product) => (
               <div key={product._id} className="border p-4">
                 <Link href={`/Products/${product._id}`}>
-                  <img
+                  <Image
                     src={product.imageUrl}
                     alt={product.productName}
+                    width={300}
+                    height={300}
                     className="w-full mb-4"
                   />
                 </Link>

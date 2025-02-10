@@ -37,9 +37,11 @@ export default function WishListPage() {
             {wishList.map((product) => (
               <div key={product.id} className="border p-4">
                 <Link href={`/Products/${product.id}`}>
-                  <img
+                  <Image
                     src={product.imageUrl}
                     alt={product.name}
+                    width={300}
+                    height={300}
                     className="w-full mb-4"
                   />
                 </Link>

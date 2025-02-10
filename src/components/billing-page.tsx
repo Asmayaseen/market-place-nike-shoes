@@ -10,6 +10,8 @@ import toast from "react-hot-toast";
 import AuthGuard from "./AuthGuard";
 import { urlFor } from "@/sanity/lib/image";
 
+
+
 // Define Product Type
 interface Product {
   _id: string;

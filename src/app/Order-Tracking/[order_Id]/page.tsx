@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Image from "next/image";
 
 const OrderTracking = () => {
   const [orderIdInput, setOrderIdInput] = useState<string>("");
@@ -23,7 +24,7 @@ const OrderTracking = () => {
       if (savedOrderDetails) {
         try {
           const parsedData = JSON.parse(savedOrderDetails);
-          console.log("Fetched Order Details:", parsedData); // Debugging
+          console.log("Fetched Order Details:", parsedData);
 
           const { formData, cart, orderId } = parsedData || {};
           if (orderId === orderIdInput) {
@@ -52,10 +53,12 @@ const OrderTracking = () => {
     <div className="min-h-screen p-6">
       <div className="max-w-md mx-auto bg-white p-6 rounded-md">
         <div className="text-center mb-3">
-          <img
+          <Image
             src="/assets/Nike.png"
             alt="Nike Logo"
-            className="mx-auto w-16 h-16"
+            width={64}
+            height={64}
+            className="mx-auto"
           />
           <h1 className="text-3xl font-bold mb-4">Track Your Order</h1>
         </div>
@@ -76,13 +79,12 @@ const OrderTracking = () => {
           </button>
         </div>
 
-        {/* Modal */}
         {isModalOpen && orderDetails?.formData && (
           <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
             <div className="bg-white p-6 rounded-md w-96">
               <h3 className="font-bold text-xl mb-4">Order Details</h3>
               <p>
-                <strong>Name:</strong> {orderDetails?.formData?.firstName ?? "N/A"}{" "}
+                <strong>Name:</strong> {orderDetails?.formData?.firstName ?? "N/A"} {" "}
                 {orderDetails?.formData?.lastName ?? ""}
               </p>
               <p>
@@ -102,7 +104,7 @@ const OrderTracking = () => {
               </ul>
               <p>
                 <strong>
-                  Total: Rs{" "}
+                  Total: Rs {" "}
                   {orderDetails?.cart?.reduce(
                     (total: number, item: any) => total + (item.price * item.quantity || 0),
                     0

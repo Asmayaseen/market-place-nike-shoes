@@ -1,6 +1,7 @@
 import { client } from "@/sanity/lib/client";
 import ProductDetailClient from "@/components/ProductDetailClient";
 
+
 export default async function ProductDetail({ params }: { params: { id: string } }) {
   const query = `
     *[_type == "product" && _id == "${params.id}"][0] {

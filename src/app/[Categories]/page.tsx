@@ -9,6 +9,7 @@ import SNKRS from '@/components/Categories/SNKRS';
 import Sales from '@/components/Categories/Sales';
 import Kids from '@/components/Categories/Kid';
 
+
 export default function Categories() {
   const pathname = usePathname(); // Get the current URL path
 
