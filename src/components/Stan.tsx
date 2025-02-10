@@ -11,7 +11,7 @@ export default function Stan() {
             <div className='flex justify-center px-10'>
                 <Image
                     className=''
-                    src={'/assets/DontMiss.png'}
+                    src={'/assets/Stan.png'}
                     alt='shoes banner'
                     width={1200}
                     height={600}

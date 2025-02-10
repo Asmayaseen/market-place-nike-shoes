@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent } from "react";
 type Product = {
   id: number; // or string if IDs are strings
   name: string;
@@ -11,20 +11,21 @@ type SearchBarProps = {
   handleSearch: (event: ChangeEvent<HTMLInputElement>) => void;
   searchQuery: string;
 };
-const SearchableProductList: React.FC<SearchBarProps> = ({ handleSearch, searchQuery }) => {
+const SearchableProductList: React.FC<SearchBarProps> = ({
+  handleSearch,
+  searchQuery,
+}) => {
   return (
     <div>
       {/* Search bar */}
-      <input 
-        type="text" 
+      <input
+        type="text"
         placeholder="Search Products..."
         value={searchQuery}
         onChange={handleSearch}
-        className="search-bar" 
+        className="search-bar"
       />
-      <div>
-      
-      </div>
+     
     </div>
   );
 };

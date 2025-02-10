@@ -1,4 +1,3 @@
-
 "use client";
 import Filter from "@/components/Filter";
 import Products from "@/components/Products";

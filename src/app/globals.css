@@ -14,12 +14,13 @@
   }
 }
 
+
+
 @layer utilities {
   .text-balance {
-    text-align: justify; /* Replace balance with a valid property */
+    text-wrap: balance;
   }
 }
-
 html,
 body {
   margin: 0;
@@ -27,23 +28,20 @@ body {
   overflow-x: hidden; /* Prevent horizontal overflow */
   width: 100%;
 }
-
 body {
   font-family: 'Helvetica Neue', Arial, sans-serif;
 }
-
 .font-helvetica {
   font-family: 'Helvetica Neue', Arial, sans-serif;
 }
-
-.ess-ul li {
-  color: gray;
+.ess-ul li{
+  color:gray;
   padding-top: 7px;
   padding-bottom: 7px;
   align-items: center;
+  
 }
-
-.ess-ul {
+.ess-ul{
   padding: 5px 10px;
   margin-bottom: 10px;
   align-items: center;

@@ -5,7 +5,7 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
-import Image from "next/image"; // Import Image from Next.js
+import Image from "next/image";
 import { useWishList } from "@/components/WishList";
 
 type Product = {
@@ -39,7 +39,7 @@ export default function Mens() {
         const fetchedProducts = await client.fetch(query);
         if (fetchedProducts.length === 0) {
           // If no products are found, show error
-          setError("No products found in the Men's Short-Sleeve Graphic Fitness Top category.");
+          setError("No products found in the Kids category.");
         } else {
           setProducts(fetchedProducts);
         }
@@ -75,15 +75,15 @@ export default function Mens() {
     <>
       <ToastContainer />
       {error ? (
-        <div className="flex w-full items-center justify-center mt-10">
-          <Image
-            src={"/assets/Out_Of_Stock.jpg"}
-            width={500} // Set width for optimization
-            height={500} // Set height for optimization
-            alt={"Out of Stock"}
-            className="mb-4"
-          />
-        </div>
+         <div className="flex w-full items-center justify-center mt-10">
+                  <Image
+                    src={"/assets/Out_Of_Stock.jpg"}
+                    width={500}
+                    height={500}
+                    alt={"Out of Stock"}
+                    className="mb-4"
+                  />
+                </div>
       ) : (
         <main className="w-full lg:w-3/4 p-6">
           <div className="flex justify-between items-center mb-4">
@@ -103,11 +103,9 @@ export default function Mens() {
             {products.map((product) => (
               <div key={product._id} className="border p-4">
                 <Link href={`/Products/${product._id}`}>
-                  <Image
+                  <img
                     src={product.imageUrl}
                     alt={product.productName}
-                    width={400} // Set width for optimization
-                    height={400} // Set height for optimization
                     className="w-full mb-4"
                   />
                 </Link>

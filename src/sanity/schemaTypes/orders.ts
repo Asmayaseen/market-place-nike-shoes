@@ -1,4 +1,3 @@
-
 export const orderSchema = {
   name: 'order',
   type: 'document',
