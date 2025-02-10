@@ -12,6 +12,7 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 import { ToastContainer } from "react-toastify";
+import { Toaster } from "react-hot-toast";
 
 
 export const metadata: Metadata = {
@@ -50,6 +51,7 @@ export default function RootLayout({
               <Header />
             
               {children}
+              <Toaster/>
               <ToastContainer />
               <Footer />
             </WishListProvider>
