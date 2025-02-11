@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { client } from "@/sanity/lib/client";
-
+import { BsFillFilterCircleFill } from "react-icons/bs";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -17,9 +17,10 @@ type Product = {
 };
 
 export default function Womens() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const { wishList, addToWishList, removeFromWishList } = useWishList();
+  const { wishList, addToWishList, removeFromWishList } = useWishList(); // Use the context
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -37,6 +38,7 @@ export default function Womens() {
         }`;
         const fetchedProducts = await client.fetch(query);
         if (fetchedProducts.length === 0) {
+          // If no products are found, show error
           setError("No products found in the Kids category.");
         } else {
           setProducts(fetchedProducts);
@@ -49,6 +51,10 @@ export default function Womens() {
 
     fetchProducts();
   }, []);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
 
   const toggleWishList = (product: Product) => {
     if (wishList.some((item) => item.id === product._id)) {
@@ -69,17 +75,30 @@ export default function Womens() {
     <>
       <ToastContainer />
       {error ? (
-        <div className="flex w-full items-center justify-center mt-10">
-          <Image
-            src="/assets/Out_Of_Stock.jpg"
-            width={500}
-            height={500}
-            alt="Out of Stock"
-            className="mb-4"
-          />
-        </div>
+         <div className="flex w-full items-center justify-center mt-10">
+                          <Image
+                            src={"/assets/Out_Of_Stock.jpg"}
+                            width={500}
+                            height={500}
+                            alt={"Out of Stock"}
+                            className="mb-4"
+                          />
+                        </div>
       ) : (
         <main className="w-full lg:w-3/4 p-6">
+          <div className="flex justify-between items-center mb-4">
+            {!isSidebarOpen && (
+              <button
+                className="lg:hidden top-4 left-4 z-auto bg-gray-800 text-white p-2 rounded-full"
+                onClick={toggleSidebar}
+              >
+                <BsFillFilterCircleFill />
+              </button>
+            )}
+            <h2 className="text-xl font-semibold">Sort By</h2>
+            <button className="text-gray-600">Hide Filters</button>
+          </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {products.map((product) => (
               <div key={product._id} className="border p-4">
@@ -87,9 +106,9 @@ export default function Womens() {
                   <Image
                     src={product.imageUrl}
                     alt={product.productName}
-                    width={300}
+                    className="w-full mb-4"
                     height={300}
-                    className="w-full mb-4 object-cover"
+                    width={300}
                   />
                 </Link>
                 <h3 className="text-lg font-medium">{product.productName}</h3>

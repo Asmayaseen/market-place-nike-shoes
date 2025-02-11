@@ -1,4 +1,3 @@
-
 "use client";
 import { usePathname } from 'next/navigation';
 import Filter from "@/components/Filter";
@@ -8,7 +7,6 @@ import Products from '@/components/Products';
 import SNKRS from '@/components/Categories/SNKRS';
 import Sales from '@/components/Categories/Sales';
 import Kids from '@/components/Categories/Kid';
-
 
 export default function Categories() {
   const pathname = usePathname(); // Get the current URL path

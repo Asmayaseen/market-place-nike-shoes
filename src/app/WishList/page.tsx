@@ -40,9 +40,9 @@ export default function WishListPage() {
                   <Image
                     src={product.imageUrl}
                     alt={product.name}
-                    width={300}
-                    height={300}
                     className="w-full mb-4"
+                    height={300}
+                    width={300}
                   />
                 </Link>
                 <h3 className="text-lg font-medium">{product.name}</h3>

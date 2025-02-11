@@ -106,9 +106,9 @@ export default function Mens() {
                   <Image
                     src={product.imageUrl}
                     alt={product.productName}
+                    className="w-full mb-4"
                     width={300}
                     height={300}
-                    className="w-full mb-4"
                   />
                 </Link>
                 <h3 className="text-lg font-medium">{product.productName}</h3>

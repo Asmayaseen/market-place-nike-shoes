@@ -14,8 +14,6 @@ import {
 import { ToastContainer } from "react-toastify";
 import { Toaster } from "react-hot-toast";
 
-
-
 export const metadata: Metadata = {
   title: "Nike Store",
   description: "Nike E-Commerce Website",
@@ -27,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
+   
       <html lang="en">
         <head>
           <link
@@ -43,22 +41,17 @@ export default function RootLayout({
         <body>
           <CartProvider>
             <WishListProvider>
-              <SignedOut>
-                <SignInButton />
-              </SignedOut>
-              <SignedIn>
-                <UserButton />
-              </SignedIn>
+             
               <Header />
-            
+
               {children}
-              <Toaster/>
+              
               <ToastContainer />
               <Footer />
             </WishListProvider>
           </CartProvider>
         </body>
       </html>
-    </ClerkProvider>
+    
   );
 }

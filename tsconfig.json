@@ -34,7 +34,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/app/api/create-checkout-session.js"
-, "next.config.mjs"  ],
+, "next.config.mjs", "src/middleware.ts"  ],
   "exclude": [
     "node_modules"
   ]
